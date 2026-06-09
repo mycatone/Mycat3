@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>parent</artifactId>
+        <groupId>io.mycat</groupId>
+        <version>3.00-release</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
+    <artifactId>mycat3</artifactId>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/io.netty/netty-codec-haproxy -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-codec-haproxy</artifactId>
+            <version>4.1.74.Final</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.r2dbc/r2dbc-pool -->
+<!--        <dependency>-->
+<!--            <groupId>io.r2dbc</groupId>-->
+<!--            <artifactId>r2dbc-pool</artifactId>-->
+<!--            <version>0.9.0.M2</version>-->
+<!--        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/com.lmax/disruptor -->
+        <dependency>
+            <groupId>io.mycat</groupId>
+            <artifactId>executor</artifactId>
+            <version>1.22-release</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.10.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>2.7.1</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-csv -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>1.8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>1.8</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.github.oshi/oshi-dist -->
+        <dependency>
+            <groupId>com.github.oshi</groupId>
+            <artifactId>oshi-dist</artifactId>
+            <version>5.8.5</version>
+            <type>pom</type>
+            <exclusions>
+                <exclusion>
+                    <artifactId>org.slf4j</artifactId>
+                    <groupId>slf4j-simple</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>oshi-demo</artifactId>
+                    <groupId>com.github.oshi</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.prometheus/simpleclient -->
+        <dependency>
+            <groupId>io.prometheus</groupId>
+            <artifactId>simpleclient</artifactId>
+            <version>0.9.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.prometheus/simpleclient_httpserver -->
+        <dependency>
+            <groupId>io.prometheus</groupId>
+            <artifactId>simpleclient_httpserver</artifactId>
+            <version>0.9.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.prometheus/simpleclient_hotspot -->
+        <dependency>
+            <groupId>io.prometheus</groupId>
+            <artifactId>simpleclient_hotspot</artifactId>
+            <version>0.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.mycat</groupId>
+            <artifactId>proxy</artifactId>
+            <version>1.22-release</version>
+            <exclusions>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.mycat</groupId>
+            <artifactId>common</artifactId>
+            <version>1.22-release</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>log4j</artifactId>
+                    <groupId>log4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>org.slf4j</artifactId>
+                    <groupId>slf4j-simple</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>guava</artifactId>
+                    <groupId>com.google.guava</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.mycat</groupId>
+            <artifactId>datasource</artifactId>
+            <version>1.22-release</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/au.com.bytecode/opencsv -->
+        <dependency>
+            <groupId>au.com.bytecode</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>2.4</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>28.1-jre</version>
+        </dependency>
+        <dependency>
+            <groupId>io.mycat</groupId>
+            <artifactId>hbt</artifactId>
+            <version>1.22-release</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jackson-databind</artifactId>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>protobuf-java</artifactId>
+                    <groupId>com.google.protobuf</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>guava</artifactId>
+                    <groupId>com.google.guava</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>javax.servlet-api</artifactId>
+                    <groupId>javax.servlet</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jackson-core</artifactId>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>snakeyaml</artifactId>
+                    <groupId>org.yaml</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jsr305</artifactId>
+                    <groupId>com.google.code.findbugs</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>log4j</artifactId>
+                    <groupId>log4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>org.slf4j</artifactId>
+                    <groupId>slf4j-simple</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.mycat</groupId>
+            <artifactId>va</artifactId>
+            <version>1.22-release</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.vertx/vertx-core -->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-core</artifactId>
+            <version>4.2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-access</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.danielwegener</groupId>
+            <artifactId>logback-kafka-appender</artifactId>
+            <version>0.2.0-RC2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>2.7.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.zendesk</groupId>
+            <artifactId>mysql-binlog-connector-java</artifactId>
+            <version>0.25.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ru.yandex.clickhouse</groupId>
+            <artifactId>clickhouse-jdbc</artifactId>
+            <version>0.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>4.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.5.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>11.2.3.jre8</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <version>21.9.0.0</version>
+            <scope>test</scope>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>cc.blynk.clickhouse</groupId>-->
+<!--            <artifactId>clickhouse4j</artifactId>-->
+<!--            <version>1.4.4</version>-->
+<!--        </dependency>-->
+    </dependencies>
+    <build>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <finalName>mycat2-${project.version}-jar-with-dependencies</finalName>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/*.SF</exclude>
+                                <exclude>META-INF/*.DSA</exclude>
+                                <exclude>META-INF/*.RSA</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>reference.conf</resource>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>io.mycat.MycatCore</mainClass>
+                                </transformer>
+
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--            <plugin>-->
+            <!--                <groupId>org.codehaus.mojo</groupId>-->
+            <!--                <artifactId>appassembler-maven-plugin</artifactId>-->
+            <!--                <version>2.1.0</version>-->
+            <!--                <configuration>-->
+            <!--                    <configurationDirectory>conf</configurationDirectory>-->
+            <!--                    &lt;!&ndash;配置文件拷贝&ndash;&gt;-->
+            <!--                    <configurationSourceDirectory>src/main/resources</configurationSourceDirectory>-->
+            <!--                    <copyConfigurationDirectory>true</copyConfigurationDirectory>-->
+            <!--                    &lt;!&ndash;配置文件拷贝&ndash;&gt;-->
+            <!--                    <repositoryLayout>flat</repositoryLayout>-->
+            <!--                    <repositoryName>lib</repositoryName>-->
+            <!--                    <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>-->
+            <!--                    <target>${project.build.directory}</target>-->
+            <!--                    <useWildcardClassPath>true</useWildcardClassPath>-->
+            <!--                    <encoding>UTF-8</encoding>-->
+            <!--                    <tempDirectory>tmp</tempDirectory>-->
+            <!--                    <daemons>-->
+            <!--                        <daemon>-->
+            <!--                            <id>mycat</id>-->
+            <!--                            <mainClass>io.mycat.MycatCore</mainClass>-->
+            <!--                            <commandLineArguments>-->
+            <!--                                <commandLineArgument>start</commandLineArgument>-->
+            <!--                            </commandLineArguments>-->
+            <!--                            <platforms>-->
+            <!--                                <platform>jsw</platform>-->
+            <!--                            </platforms>-->
+            <!--                            <generatorConfigurations>-->
+            <!--                                <generatorConfiguration>-->
+            <!--                                    <generator>jsw</generator>-->
+            <!--                                    <includes>-->
+            <!--                                        <include>aix-ppc-32</include>-->
+            <!--                                        <include>aix-ppc-64</include>-->
+            <!--                                        <include>hpux-parisc-64</include>-->
+            <!--                                        <include>linux-x86-32</include>-->
+            <!--                                        <include>linux-x86-64</include>-->
+            <!--                                        <include>linux-ppc-64</include>-->
+            <!--                                        <include>macosx-ppc-32</include>-->
+            <!--                                        <include>macosx-x86-universal-32</include>-->
+            <!--                                        <include>macosx-universal-32</include>-->
+            <!--                                        <include>macosx-universal-64</include>-->
+            <!--                                        <include>solaris-sparc-32</include>-->
+            <!--                                        <include>solaris-sparc-64</include>-->
+            <!--                                        <include>solaris-x86-32</include>-->
+            <!--                                        <include>windows-x86-32</include>-->
+            <!--                                        <include>windows-x86-64</include>-->
+            <!--                                    </includes>-->
+            <!--                                    <configuration>-->
+            <!--                                        <property>-->
+            <!--                                            <name>wrapper.ping.timeout</name>-->
+            <!--                                            <value>120</value>-->
+            <!--                                        </property>-->
+            <!--                                        <property>-->
+            <!--                                            <name>set.default.REPO_DIR</name>-->
+            <!--                                            <value>lib</value>-->
+            <!--                                        </property>-->
+            <!--                                        <property>-->
+            <!--                                            <name>wrapper.logfile.maxsize</name>-->
+            <!--                                            <value>512m</value>-->
+            <!--                                        </property>-->
+            <!--                                        <property>-->
+            <!--                                            <name>wrapper.logfile.maxfiles</name>-->
+            <!--                                            <value>30</value>-->
+            <!--                                        </property>-->
+            <!--                                        <property>-->
+            <!--                                            <name>wrapper.logfile</name>-->
+            <!--                                            <value>logs/wrapper.log</value>-->
+            <!--                                        </property>-->
+            <!--                                    </configuration>-->
+            <!--                                </generatorConfiguration>-->
+            <!--                            </generatorConfigurations>-->
+            <!--                            <jvmSettings>-->
+            <!--                                <initialMemorySize>256M</initialMemorySize>-->
+            <!--                                <maxMemorySize>8192M</maxMemorySize>-->
+            <!--                                <systemProperties>-->
+            <!--                                    <systemProperty>MYCAT_HOME=./conf</systemProperty>-->
+            <!--                                </systemProperties>-->
+            <!--                                <extraArguments>-->
+            <!--                                    <extraArgument>-Dfile.encoding=UTF-8</extraArgument>-->
+            <!--                                    <extraArgument>-server</extraArgument>-->
+            <!--                                    &lt;!&ndash; 远程JMX &ndash;&gt;-->
+            <!--                                    <extraArgument>-Dcom.sun.management.jmxremote</extraArgument>-->
+            <!--                                    <extraArgument>-Dcom.sun.management.jmxremote.port=1984</extraArgument>-->
+            <!--                                    <extraArgument>-Dcom.sun.management.jmxremote.authenticate=false</extraArgument>-->
+            <!--                                    <extraArgument>-Dcom.sun.management.jmxremote.ssl=false</extraArgument>-->
+            <!--                                    <extraArgument>-Xmx32G</extraArgument>-->
+            <!--                                    <extraArgument>-Xms1G</extraArgument>-->
+            <!--                                </extraArguments>-->
+            <!--                            </jvmSettings>-->
+            <!--                        </daemon>-->
+            <!--                    </daemons>-->
+            <!--                </configuration>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>generate-jsw-scripts</id>-->
+            <!--                        <phase>package</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>generate-daemons</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
+
+            <!--            <plugin>-->
+            <!--                <groupId>org.apache.maven.plugins</groupId>-->
+            <!--                <artifactId>maven-antrun-plugin</artifactId>-->
+            <!--                <version>1.8</version>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>createDistJar</id>-->
+            <!--                        <goals>-->
+            <!--                            <goal>run</goal>-->
+            <!--                        </goals>-->
+            <!--                        <phase>package</phase>-->
+            <!--                        <configuration>-->
+            <!--                            <target>-->
+            <!--                                <echo message="${project.build.directory}"/>-->
+            <!--                                <mkdir dir="${project.build.directory}"/>-->
+            <!--                                <mkdir dir="${project.build.directory}/jsw/mycat/logs"/>-->
+            <!--                                <tar-->
+            <!--                                        destfile="${project.build.directory}/mycat2-${project.version}.tar.gz"-->
+            <!--                                >-->
+            <!--                                    <tarfileset dir="${project.build.directory}/jsw" filemode="755">-->
+            <!--                                        <include name="mycat/bin/**"/>-->
+            <!--                                        <include name="mycat/conf/**"/>-->
+            <!--                                        <include name="mycat/logs"/>-->
+            <!--                                        <include name="mycat/lib/**"/>-->
+            <!--                                    </tarfileset>-->
+            <!--                                    <tarfileset dir="${project.basedir}/..">-->
+            <!--                                        <include name="README.md"/>-->
+            <!--                                    </tarfileset>-->
+            <!--                                </tar>-->
+            <!--                                <tar basedir="${project.basedir}/src/main/resources"-->
+            <!--                                     destfile="${project.build.directory}/mycat2-${project.version}-resources.tar.gz"-->
+            <!--                                     includes="**">-->
+            <!--                                </tar>-->
+            <!--                            </target>-->
+
+            <!--                        </configuration>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <format>{1}</format>
+                    <items>
+                        <item>timestamp</item>
+                    </items>
+                    <doCheck>false</doCheck>
+                    <doUpdate>false</doUpdate>
+                    <timestampFormat>{0,date,yyyyMMddHHmmss}</timestampFormat>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.3</version>
+                <executions>
+                    <execution>
+                        <id>version</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                        <configuration>
+                            <file>${project.basedir}/${version.template.file}</file>
+                            <outputFile>${project.basedir}/src/main/resources/${version.file}</outputFile>
+                            <replacements>
+                                <replacement>
+                                    <token>@buildnumber@</token>
+                                    <value>${buildNumber}</value>
+                                </replacement>
+                                <replacement>
+                                    <token>@buildtime@</token>
+                                    <value>${maven.build.timestamp}</value>
+                                </replacement>
+                                <replacement>
+                                    <token>@pomversion@</token>
+                                    <value>${project.version}</value>
+                                </replacement>
+                                <replacement>
+                                    <token>@giturl@</token>
+                                    <value>https://github.com/MyCATApache/Mycat2.git</value>
+                                </replacement>
+                                <replacement>
+                                    <token>@mycatsite@</token>
+                                    <value>http://mycat.org.cn/</value>
+                                </replacement>
+                                <replacement>
+                                    <token>@qqgroup@</token>
+                                    <value>332702697</value>
+                                </replacement>
+                            </replacements>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>version2</id>
+
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                        <configuration>
+                            <!--<file>${project.basedir}/src/main/java/io/mycat/config/Versions.template</file>-->
+                            <!--<outputFile>${project.basedir}/src/main/java/io/mycat/config/Versions.java</outputFile>-->
+                            <!--<replacements>-->
+                            <!--<replacement>-->
+                            <!--<token>@server-version@</token>-->
+                            <!--<value>5.6.29-mycat-${project.version}-${timestamp}</value>-->
+                            <!--</replacement>-->
+                            <!--</replacements>-->
+                        </configuration>
+                    </execution>
+                </executions>
+
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <format>{1}</format>
+                    <items>
+                        <item>timestamp</item>
+                        <item>scmVersion</item>
+                    </items>
+                    <doCheck>false</doCheck>
+                    <doUpdate>false</doUpdate>
+                    <timestampFormat>{0,date,yyyyMMddHHmmss}</timestampFormat>
+                    <providerImplementations>
+                        <git>git</git>
+                    </providerImplementations>
+
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

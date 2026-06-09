@@ -1,0 +1,235 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.mycat</groupId>
+  <artifactId>parent</artifactId>
+  <version>3.00-release</version>
+  <modules>
+    <module>config</module>
+    <module>proxy</module>
+    <module>plug</module>
+    <module>router</module>
+    <!--<module>sqlparser</module>-->
+    <module>common</module>
+    <module>datasource</module>
+    <module>mycat3</module>
+    <!--<module>grid</module>-->
+    <module>replica</module>
+      <module>hbt</module>
+      <module>example</module>
+      <module>statistic</module>
+      <module>va</module>
+    <module>assistant</module>
+      <module>internalexample</module>
+      <module>executor</module>
+    <module>console</module>
+  </modules>
+  <packaging>pom</packaging>
+  <name>parent</name>
+  <description>The project of Mycat3</description>
+  <url>http://io.mycat</url>
+
+  <properties>
+    <app.encoding>UTF-8</app.encoding>
+    <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+    <version.template.file>version.txt.template</version.template.file>
+    <version.file>version.txt</version.file>
+  </properties>
+
+  <scm>
+    <connection>scm:git:ssh://apachemycat@github.com/MyCATApache/Mycat2.git</connection>
+    <developerConnection>scm:git:ssh://apachemycat@github.com/MyCATApache/Mycat2.git
+    </developerConnection>
+    <url>scm:git:ssh://apachemycat@github.com/MyCATApache/Mycat2.git</url>
+  </scm>
+
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.realityforge.org.jetbrains.annotations/org.jetbrains.annotations -->
+    <dependency>
+      <groupId>org.realityforge.org.jetbrains.annotations</groupId>
+      <artifactId>org.jetbrains.annotations</artifactId>
+      <version>1.2.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.30</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.1</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <id>mvnrepository</id>
+      <name>mvnrepository</name>
+      <url>http://www.mvnrepository.com/</url>
+    </repository>
+    <repository>
+      <id>sonatype-snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </repository>
+  </repositories>
+
+  <build>
+    <!--<resources>-->
+    <!--<resource>-->
+    <!--<directory>src/main/resources</directory>-->
+    <!--<excludes>-->
+    <!--<exclude>**/.svn/**</exclude>-->
+    <!--</excludes>-->
+    <!--</resource>-->
+    <!--<resource>-->
+    <!--<directory>${basedir}</directory>-->
+    <!--<includes>-->
+    <!--<include>${version.file}</include>-->
+    <!--</includes>-->
+    <!--</resource>-->
+    <!--</resources>-->
+    <testResources>
+      <testResource>
+        <directory>src/test/resources</directory>
+        <excludes>
+          <exclude>**/.svn/**</exclude>
+        </excludes>
+      </testResource>
+    </testResources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <!--
+          Upgraded 2.3.2 → 3.11.0 so `<release>` is natively supported.
+          `<release>8</release>` enforces both bytecode and API level: writing
+          Java 9+ APIs (e.g. Map.of, List.of) now fails compile on the JDK we
+          build with, not at runtime on JRE 8.
+        -->
+        <version>3.11.0</version>
+        <configuration>
+          <release>8</release>
+          <encoding>${app.encoding}</encoding>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.4.1</version>
+        <executions>
+          <!--
+            Two-tier enforcement:
+              (1) STRICT (`fail=true`): Maven + JDK version sanity. Anyone trying
+                  to build with the wrong tooling fails fast.
+              (2) ADVISORY (`fail=false`): dependencyConvergence and dup-decl
+                  rules. Mycat3 has pre-existing jackson/commons-csv conflicts
+                  the team can fix incrementally; we log warnings now without
+                  breaking the build.
+          -->
+          <execution>
+            <id>enforce-build-tooling</id>
+            <goals><goal>enforce</goal></goals>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>[3.6.0,)</version>
+                  <message>Mycat3 needs Maven 3.6+.</message>
+                </requireMavenVersion>
+                <requireJavaVersion>
+                  <!-- TARGET is JDK 8 via <release>8</release>; we BUILD on 11+. -->
+                  <version>[11,)</version>
+                  <message>Build with JDK 11+ (compiles to JDK 8 bytecode).</message>
+                </requireJavaVersion>
+              </rules>
+              <fail>true</fail>
+            </configuration>
+          </execution>
+          <execution>
+            <id>enforce-dependency-hygiene</id>
+            <goals><goal>enforce</goal></goals>
+            <configuration>
+              <rules>
+                <dependencyConvergence/>
+                <banDuplicatePomDependencyVersions/>
+              </rules>
+              <fail>false</fail>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!--<plugin>-->
+      <!--<groupId>org.apache.maven.plugins</groupId>-->
+      <!--<artifactId>maven-source-plugin</artifactId>-->
+      <!--<version>2.1.2</version>-->
+      <!--<configuration>-->
+      <!--<attach>true</attach>-->
+      <!--</configuration>-->
+      <!--<executions>-->
+      <!--<execution>-->
+      <!--<id>attach-sources</id>-->
+      <!--<goals>-->
+      <!--<goal>jar-no-fork</goal>-->
+      <!--</goals>-->
+      <!--</execution>-->
+      <!--</executions>-->
+      <!--</plugin>-->
+      <!--<plugin>-->
+      <!--<groupId>org.apache.maven.plugins</groupId>-->
+      <!--<artifactId>maven-jar-plugin</artifactId>--><!--<version>3.1.2</version>-->
+      <!--<configuration>-->
+      <!--<excludes>-->
+      <!--<exclude>**/.svn/**</exclude>-->
+      <!--</excludes>-->
+      <!--</configuration>-->
+      <!--<executions>-->
+      <!--<execution>-->
+      <!--<goals>-->
+      <!--<goal>test-jar</goal>-->
+      <!--</goals>-->
+      <!--</execution>-->
+      <!--</executions>-->
+      <!--</plugin>-->
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>3.1.11</version>
+        <dependencies>
+          <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
+          <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs</artifactId>
+            <version>4.0.0-beta2</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-install-plugin</artifactId>
+        <version>2.5.2</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M5</version>
+        <configuration>
+           <forkMode>once</forkMode>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.surefire</groupId>
+            <artifactId>surefire-junit47</artifactId>
+            <version>3.0.0-M5</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+</project>

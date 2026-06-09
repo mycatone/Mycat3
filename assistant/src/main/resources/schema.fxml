@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8"
+  xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.mycat.ui.SchemaConfigVO">
+  <children>
+    <Label layoutX="247.0" prefHeight="82.0" prefWidth="100" text="逻辑库"/>
+    <HBox layoutX="192.0" layoutY="85.0" maxWidth="Infinity" minHeight="30">
+      <children>
+        <Label prefWidth="100" text="逻辑库名"/>
+        <TextField fx:id="schemaName" layoutY="142.0" prefWidth="240.0"/>
+      </children>
+    </HBox>
+
+    <HBox layoutX="192.0" layoutY="125.0" maxWidth="Infinity" minHeight="30">
+      <children>
+        <Label prefWidth="100.0" text="映射目标"/>
+        <TextField fx:id="defaultTargetName" prefWidth="240.0"/>
+      </children>
+    </HBox>
+    <Button fx:id="saveSchema" layoutX="369.0" layoutY="285.0" onAction="#save" text="保存"/>
+  </children>
+</AnchorPane>

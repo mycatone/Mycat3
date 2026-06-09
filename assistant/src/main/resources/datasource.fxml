@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="530.0" prefWidth="858.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.mycat.ui.DatasourceVO">
+    <children>
+        <Label layoutX="247.0" prefHeight="82.0" prefWidth="93.0" text="数据源" />
+        <HBox layoutX="192.0" layoutY="85.0" maxWidth="Infinity" minHeight="30">
+           <children>
+               <Label prefWidth="120" text="数据源名称" />
+               <TextField fx:id="name" prefWidth="470.0" />
+           </children>
+        </HBox>
+        <HBox layoutX="192.0" layoutY="125.0" maxWidth="Infinity" minHeight="30">
+           <children>
+               <Label prefWidth="120" text="数据源类型" />
+               <TextField fx:id="type" prefWidth="470.0" />
+           </children>
+        </HBox>
+        <HBox layoutX="192.0" layoutY="165.0" maxWidth="Infinity" minHeight="30">
+           <children>
+               <Label prefWidth="120" text="数据库类型" />
+               <TextField fx:id="dbType" prefWidth="470.0" />
+           </children>
+        </HBox>
+        <HBox layoutX="192.0" layoutY="205.0" maxWidth="Infinity" minHeight="30">
+           <children>
+               <Label prefWidth="120" text="url连接字符串" />
+               <TextField fx:id="url" prefWidth="470.0" />
+           </children>
+        </HBox>
+        <HBox layoutX="192.0" layoutY="245.0" maxWidth="Infinity" minHeight="30">
+           <children>
+               <Label prefWidth="120" text="用户名" />
+               <TextField fx:id="user" prefWidth="470.0" />
+           </children>
+        </HBox>
+        <HBox layoutX="192.0" layoutY="285.0" maxWidth="Infinity" minHeight="30">
+           <children>
+               <Label prefWidth="120" text="密码" />
+               <PasswordField fx:id="password" prefWidth="470.0" />
+           </children>
+        </HBox>
+        <Button fx:id="saveDatasource" layoutX="380.0" layoutY="330.0" onAction="#save" text="保存" />
+    </children>
+</AnchorPane>

@@ -1,0 +1,8 @@
+{
+	"dialect":"mysql",
+	"ip":null,
+	"password":"root",
+	"transactionType":"proxy",
+	"username":"root",
+	"schemas":["pdd","pdd2","pdd3"]
+}
